@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div>
+        <nav>
+            <a href="/">Home</a>
+            <a href="{% url 'add_task' %}">Add Task</a>
+        </nav>
+        <h1>ToDo</h1>
+        <p>{{name}}</p>
+        <ul>
+            {% for task in tasks %}
+                <li>{{task.task}} -- {{task.date}} -- {% if task.is_completed %} -- Done {% else %} -- Incomplete {% endif %}</li>   <!--  each attributes(column name) are printed-->
+                <a href="{% url 'edit_task' task.id %}"> Edit</a>   
+                {% endfor %}
+        </ul>
+    </div>
+</body>
+</html>
+
