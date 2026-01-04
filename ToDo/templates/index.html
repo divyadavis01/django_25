@@ -17,7 +17,9 @@
             {% for task in tasks %}
                 <li>{{task.task}} -- {{task.date}} -- {% if task.is_completed %} -- Done {% else %} -- Incomplete {% endif %}</li>   <!--  each attributes(column name) are printed-->
                 <a href="{% url 'edit_task' task.id %}"> Edit</a>   
+                <input type="button" value="Delete">  <!-- not completed--->
                 {% endfor %}
+                
         </ul>
     </div>
 </body>

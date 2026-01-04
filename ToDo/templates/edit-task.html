@@ -13,9 +13,11 @@
         </nav>
         <h1>Edit Task</h1>
         <form method="POST" action="">
-            {% csrf_token%}
+            {% csrf_token %}
             <label>Task</label>
-            <input type="text" name="task" value="{{todo.task}}">
+            <input type="text" name="tk" value="{{todo.task}}">
+            <label >Completion Status</label>
+            <input type="checkbox" name="status" value="True" {% if todo.is_completed %} checked {% endif %}>
             <input type="submit" value="Save Changes">
         </form>
     </div>

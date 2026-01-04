@@ -5,7 +5,7 @@ from django.http import HttpResponse
 # Create your views here.
 
 def home(request):
-    username="Biya"
+    # username="Biya"
     todos=ToDo.objects.all()      # all data are retrived as objects in django
     # print(todos)
     # todos = [
@@ -25,7 +25,7 @@ def home(request):
     #         "date": "2025-01-10"
     #     }
     # ]
-    context={"name":username,"tasks":todos}
+    context={"tasks":todos}
     return render(request,"index.html",context)
 
 def addTask(request):
@@ -37,6 +37,15 @@ def addTask(request):
     return render(request,"add-task.html")
 
 def editTask(request,task_id):
-    task=ToDo.objects.get(id=task_id)   # retrives row of the selected id
-    print(task)
-    return render(request,"edit-task.html",{"todo":task})
+    tasks=ToDo.objects.get(id=task_id)   # retrives row of the selected id
+    if request.method=="POST":
+        t=request.POST["tk"]
+        status=request.POST.get("status",False)
+        tasks.task=t
+        tasks.is_completed=status
+        tasks.save()
+        return redirect("index")
+    return render(request,"edit-task.html",{"todo":tasks})
+
+def deletetask(request,task_id):
+    tasks=ToDo.objects.get(id=task_id)
