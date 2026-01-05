@@ -10,18 +10,25 @@
         <nav>
             <a href="/">Home</a>
             <a href="{% url 'add_task' %}">Add Task</a>
+
         </nav>
         <h1>ToDo</h1>
         <p>{{name}}</p>
         <ul>
             {% for task in tasks %}
-                <li>{{task.task}} -- {{task.date}} -- {% if task.is_completed %} -- Done {% else %} -- Incomplete {% endif %}</li>   <!--  each attributes(column name) are printed-->
-                <a href="{% url 'edit_task' task.id %}"> Edit</a>   
-                <input type="button" value="Delete">  <!-- not completed--->
+                <li> {% if task.is_completed %} <s>{{task.task}} </s> {% else %} {{task.task}} {% endif %} -- {{task.date}}</li>   <!--  each attributes(column name) are printed-->
+                <a href="{% url 'edit_task' task.id %}"> Edit</a>  
+                <a href="{% url 'delete_task' task.id %}" onclick="return confirmDelete()">Delete</a> 
                 {% endfor %}
                 
         </ul>
     </div>
+    <script>
+        function confirmDelete(){
+            let choice = confirm("Are you sure?")
+            return choice
+        }
+    </script>
 </body>
 </html>
 

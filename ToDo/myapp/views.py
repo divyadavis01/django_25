@@ -49,3 +49,5 @@ def editTask(request,task_id):
 
 def deletetask(request,task_id):
     tasks=ToDo.objects.get(id=task_id)
+    tasks.delete()
+    return redirect("index")
