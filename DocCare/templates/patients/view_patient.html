@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+ 
+    <div>
+        <h1>Patient Details</h1>
+
+        <p><strong>Patient Code:</strong> {{ patient.patient_code }}</p>
+        <p><strong>Name:</strong> {{ patient.name }}</p>
+        <p><strong>Date of Birth:</strong> {{ patient.dob }}</p>
+        <p><strong>Gender:</strong> {{ patient.gender|title }}</p>
+        <p><strong>Phone:</strong> {{ patient.phone }}</p>
+        <p><strong>Address:</strong> {{ patient.address }}</p>
+        <p><strong>Registered On:</strong> {{ patient.created_at }}</p>
+
+
+    </div>
+    <div>
+        <a href="{% url 'patients:edit_patient' patient.id %}">Edit Details</a>
+        <a href="{% url 'patients:delete_patient' patient.id %}">Delete</a>
+    </div>
+</body>
+</html>

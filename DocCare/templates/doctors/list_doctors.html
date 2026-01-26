@@ -1,0 +1,80 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Doctors List</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f6f8;
+        }
+        h2 {
+            text-align: center;
+            margin: 20px 0;
+        }
+        table {
+            width: 90%;
+            margin: auto;
+            border-collapse: collapse;
+            background: #fff;
+        }
+        th, td {
+            padding: 10px;
+            border: 1px solid #ddd;
+            text-align: center;
+        }
+        th {
+            background: #007bff;
+            color: white;
+        }
+        img {
+            width: 80px;
+            height: 80px;
+            object-fit: cover;
+            border-radius: 50%;
+        }
+    </style>
+</head>
+<body>
+
+<h2>Doctors List</h2>
+
+<table>
+    <thead>
+        <tr>
+            <th>Image</th>
+            <th>Name</th>
+            <th>Department</th>
+            <th>Gender</th>
+            <th>DOB</th>
+            <th>Join Date</th>
+            <th>Salary</th>
+            <th>Qualification</th>
+            <th>About</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for doctor in doctor %}
+        <tr>
+            <td>
+                <img src="{{ doctor.image.url }}" alt="Doctor Image">
+            </td>
+            <td>{{ doctor.name }}</td>
+            <td>{{ doctor.department.name }}</td>
+            <td>{{ doctor.gender }}</td>
+            <td>{{ doctor.dob }}</td>
+            <td>{{ doctor.join_date }}</td>
+            <td>{{ doctor.salary }}</td>
+            <td>{{ doctor.qualification }}</td>
+            <td>{{ doctor.about|truncatewords:15 }}</td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan="9">No doctors found.</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+</body>
+</html>

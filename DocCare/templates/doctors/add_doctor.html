@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Add Doctor</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f6f8;
+        }
+        .container {
+            width: 500px;
+            margin: 40px auto;
+            background: white;
+            padding: 25px;
+            border-radius: 5px;
+        }
+        input, select, textarea {
+            width: 100%;
+            padding: 8px;
+            margin: 8px 0 15px;
+        }
+        label {
+            font-weight: bold;
+        }
+        button {
+            width: 100%;
+            background: #28a745;
+            color: white;
+            border: none;
+            padding: 10px;
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>Add Doctor</h2>
+    {% for msg in messages %}
+       {{msg}}
+    {% endfor %}
+    <form method="post" enctype="multipart/form-data" action="{% url 'doctors:add_doctor' %}">
+        {% csrf_token %}
+
+        <label>Name</label>
+        <input type="text" name="name" required>
+
+        <label>Department</label>
+        <select name="department" required>
+            {% for dept in department %}
+                <option value="{{ dept.id }}">{{ dept.name }}</option>
+            {% endfor %}
+        </select>
+
+        <label>Date of Birth</label>
+        <input type="date" name="dob" required>
+
+        <label>Gender</label>
+        <select name="gender" required>
+            <option value="male">Male</option>
+            <option value="female">Female</option>
+            <option value="other">Other</option>
+        </select>
+
+        <label>Join Date</label>
+        <input type="date" name="join_date" required>
+
+        <label>Salary</label>
+        <input type="number" step="0.01" name="salary" required>
+
+        <label>Qualification</label>
+        <input type="text" name="qualification" required>
+
+        <label>About</label>
+        <textarea name="about" rows="4"></textarea>
+
+        <label>Image</label>
+        <input type="file" name="image">
+
+        <button type="submit">Save Doctor</button>
+    </form>
+</div>
+
+</body>
+</html>
+
+
+
+
+
+

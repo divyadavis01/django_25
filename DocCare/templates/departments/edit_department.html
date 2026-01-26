@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div>
+        <form action="" method="post">
+            {% csrf_token %}
+            <h1>Edit Department</h1>
+            <div>
+                <label>Department</label>
+                <input type="text" name="dep" value="{{department.name}}">
+            </div>
+
+            <div>
+                <label>Description</label>
+                <textarea name="description" >{{department.description}}</textarea>
+            </div>
+            
+            <input type="submit" value="Edit Department">
+        </form>
+    </div>
+</body>
+</html>

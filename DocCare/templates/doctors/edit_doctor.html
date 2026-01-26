@@ -1,0 +1,86 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Add Doctor</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f6f8;
+        }
+        .container {
+            width: 500px;
+            margin: 40px auto;
+            background: white;
+            padding: 25px;
+            border-radius: 5px;
+        }
+        input, select, textarea {
+            width: 100%;
+            padding: 8px;
+            margin: 8px 0 15px;
+        }
+        label {
+            font-weight: bold;
+        }
+        button {
+            width: 100%;
+            background: #28a745;
+            color: white;
+            border: none;
+            padding: 10px;
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container" style="display: flex;">
+   
+    <div>
+        <img src="{{doctor.image.url}}" style="width: 200px;height: 200px;border-radius: 100px;">
+    </div>
+    <form method="post" enctype="multipart/form-data" action="{% url 'doctors:edit_doctor' doctor.id %}">
+        {% csrf_token %}
+
+        <label>Name</label>
+        <input type="text" name="name" value="{{doctor.name}}" required>
+
+        <label>Department</label>
+        <select name="department" required>
+            {% for dept in departments %}
+                <option value="{{ dept.id }}" {% if dept.id == doctor.department.id %}selected{% endif %}>{{ dept.name }}</option>
+            {% endfor %}
+        </select>
+
+        <label>Date of Birth</label>
+        <input type="date" name="dob" value="{{doctor.dob|date:'Y-m-d'}}" required>
+
+        <label>Gender</label>
+        <select name="gender" required>
+            <option value="male">Male</option>
+            <option value="female">Female</option>
+            <option value="other">Other</option>
+        </select>
+
+        <label>Join Date</label>
+        <input type="date" name="join_date" value="{{doctor.join_date|date:'Y-m-d'}}" required>
+
+        <label>Salary</label>
+        <input type="number" step="0.01" name="salary" value="{{doctor.salary}}" required>
+
+        <label>Qualification</label>
+        <input type="text" name="qualification" value="{{doctor.qualification}}" required>
+
+        <label>About</label>
+        <textarea name="about" rows="4">{{doctor.about}}</textarea>
+
+        <label>Image</label>
+        <input type="file" name="image">
+
+        <button type="submit">Save Doctor</button>
+    </form>
+</div>
+
+</body>
+</html>
